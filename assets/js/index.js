@@ -29,7 +29,7 @@ function getUserinfo(){
        success:function(res){
             // console.log(localStorage.getItem("token"))
            console.log(res)
-           if(res.status = 0){
+           if(res.status == 0){
             renderAvatar(res.data)
            }
             
@@ -47,8 +47,10 @@ function getUserinfo(){
 // 用户登录信息渲染函数
 function renderAvatar(user){
     var name = user.nickname||user.username
+    console.log(name)
     $(".welcome span").text(name)
     // 获取用户图像
+
     if(user.user_pic){
        $(".layui-nav-img").attr('src',user.user_pic).show()
        $(".welcome span").hide()
