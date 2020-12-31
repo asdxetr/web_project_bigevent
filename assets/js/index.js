@@ -36,7 +36,7 @@ function getUserinfo(){
         },
         complete:function(res){
           
-            if(res.responseJSON.status ===0 && res.responseJSON.message =='身份认证失败！'){
+            if(res.responseJSON.status ===1 && res.responseJSON.message =='身份认证失败！'){
                     localStorage.removeItem('token')
                     location.href= "/login.html"
                 }
@@ -49,6 +49,7 @@ function renderAvatar(user){
     var name = user.nickname||user.username
     console.log(name)
     $(".welcome span").text(name)
+    $(".avatar").text(name.substring(0,1).toUpperCase())
     // 获取用户图像
 
     if(user.user_pic){

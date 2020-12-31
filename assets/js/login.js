@@ -1,4 +1,7 @@
 $(function(){
+    // 登录和注册界面切换
+    var layer = layui.layer
+    
     $('.goReg').on('click',function(){
         $('.loginBox').hide()
         $('.regBox').show()
@@ -9,7 +12,7 @@ $(function(){
     })
 
 
-
+// 注册部分
     $('#regForm').submit(function(e){
         e.preventDefault()
         $.ajax({
@@ -20,13 +23,13 @@ $(function(){
                 password:$("#pwd1").val()
             },
             success:function(res){
-                console.log($("#regUsername").val())
-                console.log(res)
+                // console.log($("#regUsername").val())
+                // console.log(res)
                 $('.goLogin').click()
             }
         })
     })
-
+// 登录部分功能
     $('#loginFrom').submit(function(e){
         e.preventDefault()
         $.ajax({
@@ -37,9 +40,17 @@ $(function(){
                 password:$('#loginPwd').val()
             },
             success:function(res){
-                console.log(res)
-              localStorage.setItem('token',res.token)
-              location.href = "/index.html"
+                if(res.status==0){
+                    localStorage.setItem('token',res.token)
+                    location.href = "/index.html"
+                    
+                }
+                // console.log(res)
+                else{
+                    layer.msg('登录失败！')
+                    localStorage.removeItem('token')
+                }
+                 
             }
         })
     })
